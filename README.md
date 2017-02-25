@@ -1,7 +1,7 @@
 # Retrofit og Gson Introduksjon
 Laget som en illustrasjon i en presentasjon om Retrofit på App workshop ved Universitetet i Bergen.
 
-Hvis du kopierer kildekoden må du huske i legge til egen access token til Mitt UiB i MainActivity.
+Hvis du kopierer kildekoden må du huske å legge til egen access token til Mitt UiB i MainActivity.
 
 ## Ressurser
 - [Veldig bra tutorials på Retrofit](https://futurestud.io/tutorials/retrofit-getting-started-and-android-client)
