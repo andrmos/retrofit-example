@@ -23,20 +23,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mitt.uib.no/api/v1/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        MittUibClient client= retrofit.create(MittUibClient.class);
+        MittUibClient client = createClient();
 
         Call<List<Course>> call = client.listCourses(accessToken);
         call.enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 if (response.isSuccessful()) {
-			ArrayList<Course> courses = response.body();
-		}
+                    List<Course> courses = response.body();
+                }
             }
 
             @Override
@@ -45,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-	int courseId = 2832;
+        int courseId = 2832;
         Call<Course> call2 = client.listCourse(courseId, accessToken);
         call2.enqueue(new Callback<Course>() {
             @Override
@@ -57,9 +52,18 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Course> call, Throwable t) {
-		Log.i("MainActivity", "onFailure: " + t.getMessage());
+                Log.i("MainActivity", "onFailure: " + t.getMessage());
             }
         });
 
+    }
+
+    private MittUibClient createClient() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://mitt.uib.no/api/v1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(MittUibClient.class);
     }
 }
